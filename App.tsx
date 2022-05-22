@@ -8,7 +8,7 @@
  * @format
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -19,35 +19,41 @@ import {
   Button,
   View,
 } from 'react-native';
+import { BotonPersonalizado } from './src/components/BotonPersonalizado';
 const App = () => {
-
-  const saludo = () => {
-    console.log("Hola esto es un saludo");
-  }
-
-
-  const estilos = StyleSheet.create({
-    contenedor: {
-      backgroundColor: "#fff",
-      flex: 1,
-    },
-    textTitle: {
-      fontSize: 34,
-      color: "#FE3434"
-    }
-  });
-
+  const [contador, setContador] = useState(0);
   return (
-    <View style = {estilos.contenedor}>
-      <Text style = {estilos.textTitle}>Mi primer aplicación</Text>
-      <Text>Mi nombre es Juan</Text>
-      <Button 
-        title=" Da click"
-        color="grey"
-        onPress={saludo}
+    <SafeAreaView style={estilo.contenedor}>
+      <Text style={estilo.texto}>Contador {contador}</Text>
+      
+      <BotonPersonalizado 
+        texto='Incrementar' 
+        color="#00B4DB"
+        accion={()=>{setContador(contador+1)}}
       />
-    </View>
+
+      <BotonPersonalizado 
+        texto='Decrementar' 
+        color="#9FD91D" 
+        accion={()=>{setContador(contador-1)}}
+      />
+
+      <BotonPersonalizado 
+        texto='Reset' 
+        color="#323E48" 
+        accion={()=>{setContador(0)}}
+      />
+
+    </SafeAreaView>
   )
 }
-
+const estilo = StyleSheet.create({
+  contenedor:{
+    flex:1,
+    alignItems: "center"
+  },
+  texto:{
+    fontSize:28
+  }
+});
 export default App;
